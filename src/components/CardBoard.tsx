@@ -23,7 +23,10 @@ export default function CardBoard() {
     return (
         <div className='card-board'>
             {symbols.map((symbol, index) =>
-                <Card key={`card-${index}`} symbol={symbol} />
+                <Card
+                    key={`card-${index}`} symbol={symbol}
+                    isFaceUp={false}
+                />
             )}
         </div>
     )
