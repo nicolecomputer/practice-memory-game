@@ -1,5 +1,7 @@
 # Memory Game
 
+![](screenshot.png)
+
 A memory game where you flip cards to test your memory.
 
 ## Getting Started

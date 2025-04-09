@@ -6,7 +6,7 @@ import { Card, CardId, shuffle } from './lib/match-game'
 type GameState = "playing" | "won"
 
 function App() {
-  const [cards, _] = React.useState<Card[]>(shuffle([
+  const [cards] = React.useState<Card[]>(shuffle([
     { symbol: "👩‍💻", id: "1" },
     { symbol: "👩‍💻", id: "2" },
     { symbol: "🎂", id: "3" },
