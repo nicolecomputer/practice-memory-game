@@ -18,6 +18,11 @@
   }
 }
 
+.card-matched {
+  background-color: rgb(253, 244, 192);
+  border: 10px solid var(--color-brown-50);
+}
+
 .face-up-card {
   box-shadow: 0 2px 8px rgba(160, 160, 160, 0.47);
   background-color: white;

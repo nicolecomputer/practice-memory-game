@@ -1,35 +1,14 @@
 import "./cardboard.css"
-import Card from "./Card";
 import React from "react";
-
-type CardId = string;
-
-type Card = {
-    id: CardId,
-    symbol: string
-}
-
-function isMatch(allCards: Card[], flippedCardIds: CardId[]): boolean {
-    const cards = allCards
-        .filter(card => flippedCardIds.includes(card.id))
-        .map(card => card.symbol)
-
-    const targetSymbol = cards[0]
-
-    for (const card of cards) {
-        if (card !== targetSymbol) {
-            return false
-        }
-    }
-
-    return true
-}
+import { CardId, Card, isMatch } from "../lib/match-game";
+import { default as CardComponent } from "./Card";
 
 type CardBoardProps = {
-    cards: Card[]
+    cards: Card[],
+    matchedCardIds: CardId[],
     onMatch: (cardIds: CardId[]) => void
 }
-export default function CardBoard({ cards, onMatch }: CardBoardProps) {
+export default function CardBoard({ cards, onMatch, matchedCardIds }: CardBoardProps) {
     const [flippedCardIds, setFlippedCardIds] = React.useState<CardId[]>([])
     const [boardLocked, setBoardLocked] = React.useState(false)
 
@@ -49,9 +28,10 @@ export default function CardBoard({ cards, onMatch }: CardBoardProps) {
     return (
         <div className='card-board'>
             {cards.map((card) =>
-                <Card
+                <CardComponent
                     key={`card-${card.id}`}
                     symbol={card.symbol}
+                    isMatched={matchedCardIds.includes(card.id)}
                     isFaceUp={flippedCardIds.includes(card.id)}
                     locked={boardLocked}
                     onClick={() => {
@@ -64,6 +44,7 @@ export default function CardBoard({ cards, onMatch }: CardBoardProps) {
                             onMatch(nextFlippedCards)
                             setFlippedCardIds([])
                         } else if (nextFlippedCards.length == 2) {
+                            setFlippedCardIds(nextFlippedCards)
                             setBoardLocked(true)
                         } else {
                             setFlippedCardIds(nextFlippedCards)
