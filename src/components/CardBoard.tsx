@@ -9,26 +9,27 @@ type Card = {
     symbol: string
 }
 
-export default function CardBoard() {
-    const symbols: Card[] = [
-        { symbol: "👩‍💻", id: "1" },
-        { symbol: "👩‍💻", id: "2" },
-        { symbol: "🎂", id: "3" },
-        { symbol: "🎂", id: "4" },
-        { symbol: "💝", id: "5" },
-        { symbol: "💝", id: "6" },
-        { symbol: "💤", id: "7" },
-        { symbol: "💤", id: "8" },
-        { symbol: "🧶", id: "9" },
-        { symbol: "🧶", id: "10" },
-        { symbol: "🥸", id: "11" },
-        { symbol: "🥸", id: "12" },
-        { symbol: "🦀", id: "13" },
-        { symbol: "🦀", id: "14" },
-        { symbol: "🐸", id: "15" },
-        { symbol: "🐸", id: "16" },
-    ]
+function isMatch(allCards: Card[], flippedCardIds: CardId[]): boolean {
+    const cards = allCards
+        .filter(card => flippedCardIds.includes(card.id))
+        .map(card => card.symbol)
 
+    const targetSymbol = cards[0]
+
+    for (const card of cards) {
+        if (card !== targetSymbol) {
+            return false
+        }
+    }
+
+    return true
+}
+
+type CardBoardProps = {
+    cards: Card[]
+    onMatch: (cardIds: CardId[]) => void
+}
+export default function CardBoard({ cards, onMatch }: CardBoardProps) {
     const [flippedCardIds, setFlippedCardIds] = React.useState<CardId[]>([])
     const [boardLocked, setBoardLocked] = React.useState(false)
 
@@ -47,7 +48,7 @@ export default function CardBoard() {
 
     return (
         <div className='card-board'>
-            {symbols.map((card) =>
+            {cards.map((card) =>
                 <Card
                     key={`card-${card.id}`}
                     symbol={card.symbol}
@@ -59,11 +60,15 @@ export default function CardBoard() {
                             card.id
                         ]
 
-                        if (nextFlippedCards.length == 2) {
+                        if (nextFlippedCards.length == 2 && isMatch(cards, nextFlippedCards)) {
+                            onMatch(nextFlippedCards)
+                            setFlippedCardIds([])
+                        } else if (nextFlippedCards.length == 2) {
                             setBoardLocked(true)
+                        } else {
+                            setFlippedCardIds(nextFlippedCards)
                         }
 
-                        setFlippedCardIds(nextFlippedCards)
                     }}
                 />
             )}
