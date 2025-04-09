@@ -1,5 +1,5 @@
 .card {
-  font-size: 50px;
+  font-size: 10vw;
   width: 100%;
   aspect-ratio: 1;
   justify-content: center;
@@ -14,6 +14,11 @@
   &:enabled {
     &:hover {
       box-shadow: 6px 6px 0px rgba(211, 211, 211, 0.4);
+    }
+    &:active {
+      background-color: var(--color-green-50);
+      opacity: 0.8;
+      transform: scale(1.05);
     }
   }
 }
