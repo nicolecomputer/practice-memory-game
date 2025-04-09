@@ -7,3 +7,27 @@ h1 {
   text-align: center;
   margin-bottom: 14px;
 }
+
+.game-board-container {
+  position: relative;
+  padding: 40px;
+}
+
+.win-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.83);
+  border-radius: 14px;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    font-size: 88px;
+    font-weight: bolder;
+    color: rgb(241, 78, 41);
+    text-shadow: 3px 3px 0 rgb(163, 152, 149);
+  }
+}

@@ -29,21 +29,25 @@ function App() {
   return (
     <>
       <h1>Memory Game</h1>
-      <CardBoard
-        matchedCardIds={matchedCardIds}
-        cards={cards}
-        onMatch={(cardIds) => {
-          const nextMatches = [
-            ...matchedCardIds,
-            ...cardIds
-          ]
-          setMatchedCardIds(nextMatches)
-          if (nextMatches.length === cards.length) {
-            setGameState("won")
-          }
-        }}
-      />
-      <p>Game state: {gameState}</p>
+      <div className='game-board-container'>
+        <CardBoard
+          matchedCardIds={matchedCardIds}
+          cards={cards}
+          onMatch={(cardIds) => {
+            const nextMatches = [
+              ...matchedCardIds,
+              ...cardIds
+            ]
+            setMatchedCardIds(nextMatches)
+            if (nextMatches.length === cards.length) {
+              setGameState("won")
+            }
+          }}
+        />
+        {gameState === "won" && <div className='win-overlay'>
+          <h2>You win!</h2>
+        </div>}
+      </div>
     </>
   )
 }
