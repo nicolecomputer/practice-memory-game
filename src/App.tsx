@@ -1,12 +1,12 @@
 import React from 'react'
 import './App.css'
 import CardBoard from './components/CardBoard'
-import { CardId } from './lib/match-game'
+import { Card, CardId, shuffle } from './lib/match-game'
 
 type GameState = "playing" | "won"
 
 function App() {
-  const cards = [
+  const [cards, _] = React.useState<Card[]>(shuffle([
     { symbol: "👩‍💻", id: "1" },
     { symbol: "👩‍💻", id: "2" },
     { symbol: "🎂", id: "3" },
@@ -23,7 +23,7 @@ function App() {
     { symbol: "🦀", id: "14" },
     { symbol: "🐸", id: "15" },
     { symbol: "🐸", id: "16" },
-  ]
+  ]))
   const [matchedCardIds, setMatchedCardIds] = React.useState<CardId[]>([])
   const [gameState, setGameState] = React.useState<GameState>("playing")
   return (

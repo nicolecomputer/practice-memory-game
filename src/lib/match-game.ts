@@ -20,3 +20,10 @@ export function isMatch(allCards: Card[], flippedCardIds: CardId[]): boolean {
 
     return true
 }
+
+
+export function shuffle(cards: Card[]): Card[] {
+    return cards.map(value => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value)
+}
