@@ -1,9 +1,13 @@
 import "./card.css"
 
-export default function Card() {
+type CardProps = {
+    symbol: string
+}
+
+export default function Card({ symbol }: CardProps) {
     return (
         <button className="card">
-            <p>💝</p>
+            <p>{symbol}</p>
         </button>
     )
 }
