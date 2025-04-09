@@ -2,8 +2,10 @@ import "./cardboard.css"
 import Card from "./Card";
 import React from "react";
 
+type CardId = string;
+
 type Card = {
-    id: string,
+    id: CardId,
     symbol: string
 }
 
@@ -27,7 +29,21 @@ export default function CardBoard() {
         { symbol: "🐸", id: "16" },
     ]
 
-    const [flippedCardId, setFlippedCardId] = React.useState<string | null>(null)
+    const [flippedCardIds, setFlippedCardIds] = React.useState<CardId[]>([])
+    const [boardLocked, setBoardLocked] = React.useState(false)
+
+    React.useEffect(() => {
+        let timeout: number;
+
+        if (boardLocked) {
+            timeout = setTimeout((() => {
+                setFlippedCardIds([])
+                setBoardLocked(false)
+            }), 800)
+        }
+
+        return () => clearTimeout(timeout)
+    }, [boardLocked])
 
     return (
         <div className='card-board'>
@@ -35,9 +51,19 @@ export default function CardBoard() {
                 <Card
                     key={`card-${card.id}`}
                     symbol={card.symbol}
-                    isFaceUp={flippedCardId === card.id}
+                    isFaceUp={flippedCardIds.includes(card.id)}
+                    locked={boardLocked}
                     onClick={() => {
-                        setFlippedCardId(card.id)
+                        const nextFlippedCards = [
+                            ...flippedCardIds,
+                            card.id
+                        ]
+
+                        if (nextFlippedCards.length == 2) {
+                            setBoardLocked(true)
+                        }
+
+                        setFlippedCardIds(nextFlippedCards)
                     }}
                 />
             )}
