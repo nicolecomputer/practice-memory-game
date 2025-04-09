@@ -31,5 +31,8 @@ h6 {
 
 body {
   background-color: #fefae0;
+  --color-brown-30: #faedcd;
+  --color-brown-50: #d4a373;
+
   /* Palette: https://coolors.co/palette/ccd5ae-e9edc9-fefae0-faedcd-d4a373 */
 }
