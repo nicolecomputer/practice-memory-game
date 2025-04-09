@@ -6,6 +6,7 @@
 h1 {
   text-align: center;
   margin-bottom: 14px;
+  color: light-dark(black, white);
 }
 
 .game-board-container {

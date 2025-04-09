@@ -31,11 +31,13 @@ h6 {
 
 body {
   height: 100vh;
-  background-color: #fefae0;
+  background-color: light-dark(#fefae0, rgb(82, 70, 66));
   align-items: center;
   justify-content: center;
 
   font-family: Arial, Helvetica, sans-serif;
+
+  color-scheme: dark;
 
   --color-brown-30: #faedcd;
   --color-brown-50: #d4a373;
